@@ -34,10 +34,7 @@ splunk.exe install app .\Splunk-ETW.tar.gz
 splunk.exe enable app Splunk-ETW
 ```
 
-Then you have to add the `Splunk-ETW` stanza to your main `inputs.conf`. The value must match a profile in the `profile/` folder. For now, there is a single available profile:
-* `cert`
-
-You can also add your own profiles!
+Then you have to add the `Splunk-ETW` stanza to your main `inputs.conf`. The value must match an entry in the `profile/` folder. By default, there is a single `cert` profile provided. The associated `inputs.conf` stanza would look like that:
 
 ```
 [Splunk-ETW://cert]
@@ -48,19 +45,31 @@ Then just restart the Splunk service:
 splunk.exe restart
 ```
 
-## Create a profile
+You can of course add your own profiles!
 
-`Splunk-ETW` can handle different profiles which are present inside the `profile` folder.
-An INI file describes which events will be forwarded to the splunk indexer.
+## Creating a profile
 
-To add a `foo` profile, create a `foo.ini` file inside the `profile` folder and add the associated line into the main `CMakeList.txt` file.
+`Splunk-ETW` can load multiple profiles from the `profile` folder.
+Each profile is an INI file describing which events will be forwarded to the Splunk indexer.
 
-To use the `foo` profile, just add the following line into the `inputs.conf` of the splunk universal forwarder:
+To add a `foo` profile:
+
+* Create a `foo.ini` file inside the `profile` folder.
+* Add the associated line into the main `CMakeList.txt` file (copy and adjust the line under`Install config files`).
+
+To use the `foo` profile, just add the following line into the `inputs.conf` of the Splunk Universal Forwarder:
+
 ```
 [Splunk-ETW://foo]
 ```
 
-### Add a provider by name
+## Configuring the profile
+
+Now that you have your profile registered into the Forwarder, edit the `.ini` file and add the providers and filters you want (see details below).
+
+Once you are satisfied with your profile, rebuild and reinstall the project as previously described. 
+
+### Adding a provider by name
 
 To add a provider *by name* just add the following line into your profile file:
 ```
