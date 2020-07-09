@@ -32,9 +32,9 @@ namespace SplunkETW
 
         public static int Main(string[] args)
         {
-            //return Run<TAEventTracingWindows>(args, DebuggerAttachPoints.StreamEvents);
-            TraceManager.BuildFromConfig(new FileIniDataParser().ReadFile(@"c:\work\config.ini"), new DebugWriter()).Start();
-            return 0;
+            return Run<TAEventTracingWindows>(args, DebuggerAttachPoints.StreamEvents);
+            //TraceManager.BuildFromConfig(new FileIniDataParser().ReadFile(@"c:\work\config.ini"), new DebugWriter()).Start();
+            //return 0;
         }
 
         /// <summary>
