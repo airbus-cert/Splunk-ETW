@@ -13,6 +13,7 @@ git clone https://github.com/airbus-cert/Splunk-ETW
 mkdir build
 cd build
 cmake ..\Splunk-ETW
+cd ..\Splunk-ETW
 cmake --build . --target package --config release
 ```
 
